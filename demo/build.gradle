@@ -1,0 +1,37 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.pinwheel.autoproxy'
+
+android {
+    compileSdkVersion APP_COMPILE_SDK as int
+    buildToolsVersion APP_BUILD_TOOLS
+
+    defaultConfig {
+        applicationId APP_APPLICATION_ID
+        minSdkVersion APP_MIN_SDK as int
+        targetSdkVersion APP_TARGET_SDK as int
+        versionCode APP_VERSION_CODE as int
+        versionName APP_VERSION_NAME
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            zipAlignEnabled true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            debuggable true
+            versionNameSuffix 'dev'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$LIB_KOTLIN"
+}
